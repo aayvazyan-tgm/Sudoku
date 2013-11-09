@@ -93,8 +93,6 @@
 				if(argc == 4) {
 					FILE* stream = fopen(argv[3], "w");
 					puzzle_solve(puzzle, 0, &moves, &solutions, stream);
-				} else {
-					puzzle_solve(puzzle, 0, &moves, &solutions, stdout);
 				}
 
 				/* Summarize the # of moves and solutions. */

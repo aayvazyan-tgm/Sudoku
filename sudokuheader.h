@@ -46,17 +46,19 @@
 	   if the set contains value (i-1). */
 	typedef unsigned short value_set_t;
 
+
+/* Prototypen hinzufuegt */
 	value_t char_to_value(char c);
-	void puzzle_fill_cell(value_t puzzle[psize][psize], int row, int col, value_t value);
-	void puzzle_fill_cell(value_t puzzle[psize][psize], int row, int col, value_t value);
-	void puzzle_write(value_t puzzle[psize][psize], FILE* stream);
-	void puzzle_read(value_t puzzle[psize][psize], FILE* stream);
-	void puzzle_read_file(value_t puzzle[psize][psize], const char* filename);
-	int puzzle_find_empty(value_t puzzle[psize][psize], int* row_out, int* col_out);
-	int region_check_and_mark(value_set_t* region, value_t value);
+	void puzzle_fill_cell(value_t puzzle[psize][psize], int, int, value_t);
+	void puzzle_fill_cell(value_t puzzle[psize][psize], int, int, value_t);
+	void puzzle_write(value_t puzzle[psize][psize], FILE*);
+	void puzzle_read(value_t puzzle[psize][psize], FILE*);
+	void puzzle_read_file(value_t puzzle[psize][psize], const char*);
+	int puzzle_find_empty(value_t puzzle[psize][psize], int*, int*);
+	int region_check_and_mark(value_set_t*, value_t);
 	int puzzle_is_valid(value_t puzzle[psize][psize]);
-	void puzzle_write_csv(value_t puzzle[psize][psize], FILE* stream);
-	void puzzle_solve(value_t puzzle[psize][psize], int depth, int* moves, int* solutions, FILE* stream);
+	void puzzle_write_csv(value_t puzzle[psize][psize], FILE*);
+	void puzzle_solve(value_t puzzle[psize][psize], int, int*, int*, FILE*);
 
 
 #endif

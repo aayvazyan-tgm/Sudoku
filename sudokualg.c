@@ -120,7 +120,7 @@ void puzzle_read(value_t puzzle[psize][psize], FILE* stream) {
 				exit(-1);
 			}
 
-			/* if/else Hinzugefuegt */
+	/* Hinzugefuegt */
 			if (c == ',') {
 				col--;
 			} else {
@@ -338,6 +338,7 @@ void puzzle_write_csv(value_t puzzle[psize][psize], FILE* stream) {
  *   - solutions (passed by reference) keeps track of how many
  *     solutions we've seen so far.
  */
+/* Hinzufuegen des Parameter stream FILE* */
 void puzzle_solve(value_t puzzle[psize][psize], int depth, int* moves,
 		int* solutions, FILE* stream) {
 
