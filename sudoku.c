@@ -49,11 +49,9 @@
 	 * one on each line are ignored.
 	 *
 	 */
-
 #include "sudokuheader.h"
-#include "sudokualg.c"
-
-
+#include <string.h>
+#include <stdio.h>
 	/**************************************************************************
 	 * Our main function.  If a command line argument is present, try to
 	 * open the file specified on the command line; otherwise, read from 
@@ -61,42 +59,52 @@
 	 */
 	int main(int argc, char** argv) {
 
-		if(strcmp(argv[1],"normal") == 0) {
-			value_t puzzle[psize][psize];
-			int moves=0, solutions=0;
+		if(argc == 1 || argc > 4)
+			printf("Arguments: normal|x-sudoku inputfile.csv outputfile.csv\n");
+		else {
+			if(strcmp(argv[1],"normal") == 0) {
+				value_t puzzle[psize][psize];
+				int moves=0, solutions=0;
 
-			/* If we have an argument, interpret it as a filename and try to
-			 read puzzle from that file. Otherwise, read from the console.  */
-			if (argc > 1) {
-			puzzle_read_file(puzzle, argv[2]);
-			} else {
-			printf("reading from standard input:\n");
-			puzzle_read(puzzle, stdin);
+				/* If we have an argument, interpret it as a filename and try to
+				 read puzzle from that file. Otherwise, read from the console.  */
+				if (argc > 1) {
+				puzzle_read_file(puzzle, argv[2]);
+				} else {
+				printf("reading from standard input:\n");
+				puzzle_read(puzzle, stdin);
+				}
+
+				/* Display the initial puzzle as a nice sanity check. */
+				printf("got initial puzzle:\n\n");
+				puzzle_write(puzzle, stdout);
+				printf("\n");
+
+				/* Display a sad message if the initial puzzle was invalid. */
+				if (!puzzle_is_valid(puzzle)) {
+				printf("initial puzzle invalid!\n");
+				/* Return -1 from main is basically the same as exit(-1) */
+				return -1;
+				}
+
+				/* Check for solutions. */
+
+	//Hinzugefuegt
+				if(argc == 4) {
+					FILE* stream = fopen(argv[3], "w");
+					puzzle_solve(puzzle, 0, &moves, &solutions, stream);
+				} else {
+					puzzle_solve(puzzle, 0, &moves, &solutions, stdout);
+				}
+
+				/* Summarize the # of moves and solutions. */
+				printf("total %d moves, %d solutions\n", moves, solutions);
 			}
 
-			/* Display the initial puzzle as a nice sanity check. */
-			printf("got initial puzzle:\n\n");
-			puzzle_write(puzzle, stdout);
-			printf("\n");
-
-			/* Display a sad message if the initial puzzle was invalid. */
-			if (!puzzle_is_valid(puzzle)) {
-			printf("initial puzzle invalid!\n");
-			/* Return -1 from main is basically the same as exit(-1) */
-			return -1;
+			if(strcmp(argv[1],"x-sudoku") == 0)
+			{
+				//Ari
 			}
-
-			/* Check for solutions. */
-			FILE* streamout = fopen(argv[3], "w");
-			puzzle_solve(puzzle, 0, &moves, &solutions, streamout);
-
-			/* Summarize the # of moves and solutions. */
-			printf("total %d moves, %d solutions\n", moves, solutions);
-		}
-
-		if(strcmp(argv[1],"x-sudoku") == 0)
-		{
-			//Ari
 		}
 
 	/* Return 0 to indicate no errors occurred. */

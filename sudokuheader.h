@@ -8,16 +8,10 @@
 /**************************************************************************
 	 * Pull two files in from the standard library.
 	 */
+#ifndef __SUDOKUHEADER__
+#define __SUDOKUHEADER__
 
-	/* Gets us the I/O stuff: printf, fprintf, fopen, stdout, stderr, etc. */
-	#include <stdio.h>
-
-	/* Gets us exit() */
-	#include <stdlib.h>
-
-/* Hinzugefuegt von mir, da ich Stringfunktionen benoetige */
-	#include <string.h>
-
+#include <stdio.h>
 
 	/**************************************************************************
 	 * Define the size of the puzzle so we avoid "magic numbers" in the
@@ -32,24 +26,6 @@
 	  psize = bsize*bsize
 
 	};
-
-	/**************************************************************************
-	 * String for converting between integer puzzle cell values (0-9) and
-	 * printable characters. Note that empty cell (value 0) maps to '.'
-	 */
-/* etwas geaendert . auf 0 */
-	const char value_chars[psize+1] = "0123456789";
-
-	/**************************************************************************
-	 * Define some global variables that affect program output.
-	 */
-
-	/* Set this to 1 for want detailed output: */
-	const int verbose = 0;
-
-	/* Set this to 1 if you just want the first puzzle solution, 2 if you
-	   just want the first 2, etc. 0 means find all solutions. */
-	const int max_solutions = 0;
 
 	/**************************************************************************
 	 * Here we set up two type definitions for our program. A "typedef" is
@@ -69,3 +45,18 @@
 	   vector. Needs to have at least psize bits. Bit i is set to one
 	   if the set contains value (i-1). */
 	typedef unsigned short value_set_t;
+
+	value_t char_to_value(char c);
+	void puzzle_fill_cell(value_t puzzle[psize][psize], int row, int col, value_t value);
+	void puzzle_fill_cell(value_t puzzle[psize][psize], int row, int col, value_t value);
+	void puzzle_write(value_t puzzle[psize][psize], FILE* stream);
+	void puzzle_read(value_t puzzle[psize][psize], FILE* stream);
+	void puzzle_read_file(value_t puzzle[psize][psize], const char* filename);
+	int puzzle_find_empty(value_t puzzle[psize][psize], int* row_out, int* col_out);
+	int region_check_and_mark(value_set_t* region, value_t value);
+	int puzzle_is_valid(value_t puzzle[psize][psize]);
+	void puzzle_write_csv(value_t puzzle[psize][psize], FILE* stream);
+	void puzzle_solve(value_t puzzle[psize][psize], int depth, int* moves, int* solutions, FILE* stream);
+
+
+#endif
