@@ -60,15 +60,15 @@
 	int main(int argc, char** argv) {
 
 		if(argc == 1 || argc > 4)
-			printf("Arguments: normal|x-sudoku inputfile.csv outputfile.csv\n");
-		else {
+			printf("Arguments: normal|x-sudoku [inputfile.csv outputfile.csv]\n");
+		else if(argc == 2 || argc == 4) {
 			if(strcmp(argv[1],"normal") == 0) {
 				value_t puzzle[psize][psize];
 				int moves=0, solutions=0;
 
 				/* If we have an argument, interpret it as a filename and try to
 				 read puzzle from that file. Otherwise, read from the console.  */
-				if (argc > 1) {
+				if (argc >= 3) {
 				puzzle_read_file(puzzle, argv[2]);
 				} else {
 				printf("reading from standard input:\n");

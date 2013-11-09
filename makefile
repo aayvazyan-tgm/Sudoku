@@ -11,6 +11,10 @@ link: compile
 # Fuehrt das Programm aus
 run: all
 	./sudoku.sh
+	
+# Fuehrt das Programm mit fixen Werten aus
+run-test: all
+	./sudoku.sh normal puzzle1.csv out.csv
 
 # Loescht alle Datein die vom Makrfile erstellt wurden
 clean:
