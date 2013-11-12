@@ -1,6 +1,6 @@
 all: link
 
-# Target zum Compilieren
+# Target zum Kompilieren
 compile:
 	gcc -Wall -c -o sudokualg.o sudokualg.c
 
@@ -16,6 +16,6 @@ run: all
 run-test: all
 	./sudoku.sh normal puzzle1.csv out.csv
 
-# Loescht alle Datein die vom Makrfile erstellt wurden
+# Loescht alle Datein die vom Makefile erstellt wurden
 clean:
 	@rm sudoku.sh *.o
