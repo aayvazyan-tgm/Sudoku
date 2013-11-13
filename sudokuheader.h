@@ -59,6 +59,6 @@
 	int puzzle_is_valid(value_t puzzle[psize][psize]);
 	void puzzle_write_csv(value_t puzzle[psize][psize], FILE*);
 	void puzzle_solve(value_t puzzle[psize][psize], int, int*, int*, FILE*);
-
+	int xsudoku;
 
 #endif

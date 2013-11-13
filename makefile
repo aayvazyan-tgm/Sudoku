@@ -15,7 +15,7 @@ run: all
 # Fuehrt das Programm mit fixen Werten aus
 run-test: all
 	./sudoku.sh normal puzzle1.csv out.csv
-	./sudoku.sh x-sudoku puzzle1.csv out.csv
+	./sudoku.sh x-sudoku xsudo1.csv xsudokuOut.csv
 
 # Loescht alle Datein die vom Makefile erstellt wurden
 clean:
